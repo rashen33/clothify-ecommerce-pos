@@ -5,8 +5,7 @@
 }
 
 .button:hover{
-    -fx-background-color: #64CCC5;
-    -fx-text-fill: "black";
+    -fx-background-color: #176B87;
 }
 
 #loginBtn:hover{
