@@ -1,3 +1,7 @@
+.ancor-pane{
+    -fx-background-color : #9EDDFF;
+}
+
 .button{
    -fx-border-radius-color:#04364A;
    -fx-background-radius: 45px 45px 45px 45px;
