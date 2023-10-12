@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.OrderController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" stroke="#6499e9" strokeType="INSIDE" strokeWidth="0.0" width="1028.0" />
+      <Text layoutX="474.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="46.0" fitWidth="48.0" layoutX="416.0" layoutY="14.0">
+         <image>
+            <Image url="@../icons/checkout.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="106.0" layoutY="94.0" text="Order ID :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="128.0" text="Employee ID :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="159.0" text="Customer Name :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="190.0" text="Contact Number :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="106.0" layoutY="222.0" text="Email :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="255.0" text="Date :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="104.0" layoutY="285.0" text="Payment :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="232.0" layoutY="156.0" prefHeight="25.0" prefWidth="175.0" promptText="Customer Name" />
+      <TextField layoutX="232.0" layoutY="188.0" prefHeight="25.0" prefWidth="175.0" promptText="Contact Number" />
+      <TextField layoutX="232.0" layoutY="220.0" prefHeight="25.0" prefWidth="175.0" promptText="Email" />
+      <DatePicker layoutX="232.0" layoutY="253.0" prefHeight="25.0" prefWidth="175.0" promptText="Date" />
+      <CheckBox layoutX="232.0" layoutY="287.0" mnemonicParsing="false" text="Cash" />
+      <CheckBox layoutX="307.0" layoutY="287.0" mnemonicParsing="false" text="Card" />
+      <TextField layoutX="330.0" layoutY="126.0" promptText="Employee Name" />
+      <ComboBox layoutX="234.0" layoutY="126.0" prefHeight="25.0" prefWidth="91.0" promptText="Select ID" />
+      <Label layoutX="547.0" layoutY="128.0" text="Item Code :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="757.0" layoutY="126.0" prefHeight="25.0" prefWidth="159.0" promptText="Item Name" />
+      <ComboBox layoutX="639.0" layoutY="126.0" prefHeight="25.0" prefWidth="98.0" promptText="Item Code" />
+      <Label layoutX="546.0" layoutY="158.0" text="Description :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="544.0" layoutY="190.0" text="Qty :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="544.0" layoutY="222.0" text="Selling Price :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="540.0" layoutY="255.0" text="Type :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="542.0" layoutY="285.0" text="Discout :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="639.0" layoutY="157.0" prefHeight="25.0" prefWidth="196.0" promptText="Description" />
+      <TextField layoutX="639.0" layoutY="188.0" prefHeight="25.0" prefWidth="48.0" promptText="Qty" />
+      <Label layoutX="713.0" layoutY="190.0" text="Qty On Hand :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="813.0" layoutY="188.0" prefHeight="25.0" prefWidth="83.0" promptText="Qty On Hand" />
+      <TextField layoutX="642.0" layoutY="220.0" prefHeight="25.0" prefWidth="77.0" promptText="0.00" />
+      <Label layoutX="737.0" layoutY="222.0" text="Profit :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="790.0" layoutY="220.0" prefHeight="25.0" prefWidth="77.0" promptText="0.00" />
+      <TextField layoutX="642.0" layoutY="253.0" prefHeight="25.0" prefWidth="95.0" promptText="Type" />
+      <TextField layoutX="790.0" layoutY="253.0" prefHeight="25.0" prefWidth="95.0" promptText="Size" />
+      <Label layoutX="746.0" layoutY="255.0" text="Size :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField layoutX="642.0" layoutY="283.0" prefHeight="25.0" prefWidth="95.0" promptText="0.00" />
+      <Button layoutX="611.0" layoutY="343.0" mnemonicParsing="false" stylesheets="@styles.css" text="Remove Oder" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="711.0" layoutY="343.0" mnemonicParsing="false" stylesheets="@styles.css" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="765.0" layoutY="343.0" mnemonicParsing="false" stylesheets="@styles.css" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="835.0" layoutY="343.0" mnemonicParsing="false" stylesheets="@styles.css" text="Add to Cart" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TableView layoutX="86.0" layoutY="391.0" prefHeight="339.0" prefWidth="861.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Item Code" />
+          <TableColumn prefWidth="138.0" text="Description" />
+            <TableColumn prefWidth="76.0" text="Qty" />
+            <TableColumn prefWidth="89.0" text="Unit Price" />
+            <TableColumn prefWidth="89.0" text="Date" />
+            <TableColumn prefWidth="89.0" text="Discount %" />
+            <TableColumn prefWidth="72.0" text="Type" />
+            <TableColumn prefWidth="77.0" text="Size" />
+            <TableColumn prefWidth="77.0" text="Amount" />
+            <TableColumn prefWidth="77.0" text="Option" />
+        </columns>
+      </TableView>
+      <Label layoutX="103.0" layoutY="757.0" text="Total :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="265.0" layoutY="757.0" text="Discount :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="428.0" layoutY="757.0" text="Balance :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="598.0" layoutY="757.0" text="Cash :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="856.0" layoutY="750.0" mnemonicParsing="false" stylesheets="@styles.css" text="Place Order" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Text layoutX="151.0" layoutY="772.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" />
+      <Text layoutX="342.0" layoutY="772.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" />
+      <Text layoutX="491.0" layoutY="772.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" />
+      <Text layoutX="644.0" layoutY="772.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" />
+   </children>
+</AnchorPane>

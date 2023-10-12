@@ -41,7 +41,7 @@
             </Label>
          </children>
       </Pane>
-      <Button layoutX="57.0" layoutY="721.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="140.0" text="Log out" textFill="WHITE">
+      <Button layoutX="48.0" layoutY="740.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="118.0" text="Log out" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -67,7 +67,7 @@
                   <Font name="System Bold" size="27.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="88.0" text="50" textFill="WHITE">
+            <Label layoutX="69.0" layoutY="85.0" text="50" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
