@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.UserRegController">
+<AnchorPane fx:id="userRegPane" prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.UserRegController">
    <children>
-      <Label layoutX="376.0" layoutY="112.0" text="User Registration">
+      <Label layoutX="342.0" layoutY="114.0" text="User Registration">
          <font>
             <Font name="System Bold" size="37.0" />
          </font>
@@ -25,7 +24,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <CheckBox layoutX="537.0" layoutY="273.0" mnemonicParsing="false" onAction="#checkAdminShowPassword" prefWidth="120.0" text="Show Password" />
+      <CheckBox layoutX="508.0" layoutY="278.0" mnemonicParsing="false" onAction="#checkAdminShowPassword" prefHeight="21.0" prefWidth="149.0" text="Show Password" />
       <Label layoutX="223.0" layoutY="410.0" text="New Username      :">
          <font>
             <Font size="17.0" />
@@ -66,7 +65,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <CheckBox layoutX="523.0" layoutY="552.0" mnemonicParsing="false" onAction="#checkUserPassword" prefWidth="120.0" text="Show Password" />
+      <CheckBox layoutX="523.0" layoutY="565.0" mnemonicParsing="false" onAction="#checkUserPassword" prefHeight="21.0" prefWidth="138.0" text="Show Password" />
       <Button layoutX="440.0" layoutY="603.0" mnemonicParsing="false" onAction="#btnBack" prefHeight="39.0" prefWidth="132.0" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />

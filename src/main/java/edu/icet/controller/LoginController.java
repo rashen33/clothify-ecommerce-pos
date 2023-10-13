@@ -18,14 +18,32 @@ public class LoginController {
         Stage stage = (Stage) loginPane.getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/dashboard.fxml"))));
+            stage.setTitle("Dashboard");
+            stage.setResizable(false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void linkRegister(ActionEvent actionEvent) {
+        Stage stage = (Stage) loginPane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/userRegForm.fxml"))));
+            stage.setTitle("User Registration");
+            stage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void linkForgotPw(ActionEvent actionEvent) {
+        Stage stage = (Stage) loginPane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/forgetPWForm.fxml"))));
+            stage.setTitle("Forget Password");
+            stage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
