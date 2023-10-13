@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.SupplierController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1028.0" />
@@ -56,12 +55,12 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="220.0" layoutY="115.0" promptText="Supplier ID" />
-      <TextField layoutX="220.0" layoutY="183.0" promptText="Name" />
-      <TextField layoutX="220.0" layoutY="224.0" promptText="Contact" />
-      <TextField layoutX="219.0" layoutY="266.0" promptText="Company" />
+      <TextField fx:id="supID" layoutX="220.0" layoutY="115.0" promptText="Supplier ID" />
+      <TextField fx:id="supName" layoutX="220.0" layoutY="183.0" promptText="Name" />
+      <TextField fx:id="supContact" layoutX="220.0" layoutY="224.0" promptText="Contact" />
+      <TextField fx:id="supCompany" layoutX="219.0" layoutY="266.0" promptText="Company" />
       <TextField layoutX="220.0" layoutY="306.0" promptText="Search" />
-      <ComboBox layoutX="220.0" layoutY="150.0" prefWidth="150.0" promptText="Select" />
+      <ComboBox fx:id="titleCmb" layoutX="220.0" layoutY="150.0" prefWidth="150.0" promptText="Select" />
       <Button layoutX="106.0" layoutY="350.0" mnemonicParsing="false" text="Print" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -72,7 +71,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="233.0" layoutY="350.0" mnemonicParsing="false" text="Save" textFill="WHITE">
+      <Button layoutX="233.0" layoutY="350.0" mnemonicParsing="false" onAction="#saveBtn" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
