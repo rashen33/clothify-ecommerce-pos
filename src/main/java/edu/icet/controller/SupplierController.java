@@ -39,10 +39,10 @@ public class SupplierController implements Initializable {
         try {
             boolean isAdded = CrudUtil.execute("INSERT INTO supplier VALUES(?,?,?,?,?)",
                         supplier.getSupID(),
+                        supplier.getTitle(),
                         supplier.getSupName(),
                         supplier.getSupContactNumber(),
-                        supplier.getSupCompany(),
-                        supplier.getTitle());
+                        supplier.getSupCompany());
 
             if(isAdded){
                 new Alert(Alert.AlertType.INFORMATION,"Supplier Saved..!").show();
