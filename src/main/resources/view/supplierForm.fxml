@@ -61,17 +61,17 @@
       <TextField fx:id="supCompany" layoutX="219.0" layoutY="266.0" promptText="Company" />
       <TextField layoutX="220.0" layoutY="306.0" promptText="Search" />
       <ComboBox fx:id="titleCmb" layoutX="220.0" layoutY="150.0" prefWidth="150.0" promptText="Select" />
-      <Button layoutX="106.0" layoutY="350.0" mnemonicParsing="false" text="Print" textFill="WHITE">
+      <Button layoutX="98.0" layoutY="350.0" mnemonicParsing="false" text="Print" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="169.0" layoutY="350.0" mnemonicParsing="false" text="Clear" textFill="WHITE">
+      <Button layoutX="156.0" layoutY="350.0" mnemonicParsing="false" onAction="#clearBtn" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="233.0" layoutY="350.0" mnemonicParsing="false" onAction="#saveBtn" text="Save" textFill="WHITE">
+      <Button layoutX="280.0" layoutY="350.0" mnemonicParsing="false" onAction="#updateBtn" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -93,5 +93,15 @@
             <TableColumn prefWidth="105.0" text="Option" />
          </columns>
       </TableView>
+      <Button layoutX="345.0" layoutY="350.0" mnemonicParsing="false" onAction="#saveBtn" text="Save" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="216.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteBtn" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

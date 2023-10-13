@@ -2,7 +2,6 @@ package edu.icet.controller;
 
 import edu.icet.entity.Supplier;
 import edu.icet.util.CrudUtil;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -83,5 +82,46 @@ public class SupplierController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void clearBtn(ActionEvent actionEvent) {
+        supID.clear();
+        supName.clear();
+        supContact.clear();
+        supCompany.clear();
+    }
+
+    public void updateBtn(ActionEvent actionEvent) {
+        Supplier supplier = new Supplier(
+                supID.getText(),
+                titleCmb.getValue().toString(),
+                supName.getText(),
+                supContact.getText(),
+                supCompany.getText()
+        );
+
+        try {
+            boolean isUpdated = CrudUtil.execute("UPDATE customer SET name=? , address=?, salary=? WHERE id=?",
+                    supplier.getSupID(),
+                    supplier.getTitle(),
+                    supplier.getSupContactNumber(),
+                    supplier.getSupCompany()
+            );
+
+            if (isUpdated){
+                new Alert(Alert.AlertType.INFORMATION,"Customer Updated..!").show();
+                clearFields();
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteBtn(ActionEvent actionEvent) {
     }
 }
