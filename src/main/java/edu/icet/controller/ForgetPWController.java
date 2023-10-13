@@ -8,4 +8,10 @@ public class ForgetPWController {
 
     public void btnAllConfirm(ActionEvent actionEvent) {
     }
+
+    public void btnSendOtp(ActionEvent actionEvent) {
+    }
+
+    public void btnOtpConfirm(ActionEvent actionEvent) {
+    }
 }
