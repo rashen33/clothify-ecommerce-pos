@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -26,11 +27,20 @@ public class SupplierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadCmb();
+        generateId();
     }
 
     public void loadCmb(){
         ObservableList<String> obs = FXCollections.observableArrayList("Mr.", "Mrs.");
         titleCmb.getItems().addAll(obs);
+    }
+
+    public void clearFields(){
+        supID.clear();
+        generateId();
+        supName.clear();
+        supContact.clear();
+        supCompany.clear();
     }
 
     public void saveBtn(ActionEvent actionEvent) {
@@ -46,6 +56,7 @@ public class SupplierController implements Initializable {
 
             if(isAdded){
                 new Alert(Alert.AlertType.INFORMATION,"Supplier Saved..!").show();
+                clearFields();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
             }
@@ -53,6 +64,24 @@ public class SupplierController implements Initializable {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void generateId() {
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT id FROM supplier ORDER BY id DESC LIMIT 1");
+
+            if (resultSet.next()){
+                int num = Integer.parseInt(resultSet.getString(1).split("[S]")[1]);
+                num++;
+                supID.setText(String.format("S%03d",num));
+            }else {
+                supID.setText("S001");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
