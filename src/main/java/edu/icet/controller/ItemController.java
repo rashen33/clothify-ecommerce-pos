@@ -43,6 +43,8 @@ public class ItemController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadCmbSupId();
         loadCmbSupName();
+        loadCmbType();
+        loadCmbSize();
     }
 
     public void printBtn(ActionEvent actionEvent) {
@@ -89,5 +91,15 @@ public class ItemController implements Initializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void loadCmbType(){
+        ObservableList<String> obs = FXCollections.observableArrayList("Male", "Female", "Kids");
+        cmbType.getItems().addAll(obs);
+    }
+
+    public void loadCmbSize(){
+        ObservableList<String> obs = FXCollections.observableArrayList("Small", "Medium","Large");
+        cmbSize.getItems().addAll(obs);
     }
 }
