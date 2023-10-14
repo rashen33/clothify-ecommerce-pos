@@ -1,18 +1,22 @@
 package edu.icet.controller;
-
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.icet.dto.tm.SupplierTm;
 import edu.icet.entity.Supplier;
 import edu.icet.util.CrudUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SupplierController implements Initializable {
@@ -21,12 +25,24 @@ public class SupplierController implements Initializable {
     public TextField supContact;
     public TextField supCompany;
     public ComboBox titleCmb;
+    public JFXTreeTableView tblSupplier;
+    public TreeTableColumn colID;
+    public TreeTableColumn colTitle;
+    public TreeTableColumn colName;
+    public TreeTableColumn colCompany;
+    public TreeTableColumn colContactNo;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colID.setCellValueFactory(new TreeItemPropertyValueFactory<>("supID"));
+        colTitle.setCellValueFactory(new TreeItemPropertyValueFactory<>("title"));
+        colName.setCellValueFactory(new TreeItemPropertyValueFactory<>("supName"));
+        colCompany.setCellValueFactory(new TreeItemPropertyValueFactory<>("supCompany"));
+        colContactNo.setCellValueFactory(new TreeItemPropertyValueFactory<>("supContactNumber"));
         loadCmb();
         generateId();
+        loadTable();
     }
 
     public void loadCmb(){
@@ -109,7 +125,7 @@ public class SupplierController implements Initializable {
             );
 
             if (isUpdated){
-                new Alert(Alert.AlertType.INFORMATION,"Customer Updated..!").show();
+                new Alert(Alert.AlertType.INFORMATION,"Supplier Updated..!").show();
                 clearFields();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
@@ -123,5 +139,43 @@ public class SupplierController implements Initializable {
     }
 
     public void deleteBtn(ActionEvent actionEvent) {
+    }
+
+    public void loadTable(){
+        ObservableList<SupplierTm> tmList = FXCollections.observableArrayList();
+        List<Supplier> list = new ArrayList<>();
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT * FROM supplier");
+
+            while (resultSet.next()){
+                list.add(new Supplier(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5)
+                ));
+            }
+
+            for (Supplier supplier : list){
+                tmList.add(new SupplierTm(
+                        supplier.getSupID(),
+                        supplier.getTitle(),
+                        supplier.getSupName(),
+                        supplier.getSupContactNumber(),
+                        supplier.getSupCompany()
+                ));
+            }
+            TreeItem<SupplierTm> treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
+            tblSupplier.setRoot(treeItem);
+            tblSupplier.setShowRoot(false);
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

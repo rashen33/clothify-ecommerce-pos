@@ -1,5 +1,6 @@
-package edu.icet.entity;
+package edu.icet.dto.tm;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Supplier {
+public class SupplierTm extends RecursiveTreeObject<SupplierTm> {
     private String supID;
     private String title;
     private String supName;
