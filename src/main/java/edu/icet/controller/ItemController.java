@@ -1,6 +1,9 @@
 package edu.icet.controller;
 
 import com.jfoenix.controls.JFXTreeTableView;
+import edu.icet.util.CrudUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -8,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeTableColumn;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ItemController implements Initializable {
@@ -36,7 +41,8 @@ public class ItemController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        loadCmbSupId();
+        loadCmbSupName();
     }
 
     public void printBtn(ActionEvent actionEvent) {
@@ -49,5 +55,39 @@ public class ItemController implements Initializable {
     }
 
     public void saveBtn(ActionEvent actionEvent) {
+    }
+
+    public void loadCmbSupId(){
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT id FROM supplier");
+            ObservableList<String> supplierId = FXCollections.observableArrayList();
+
+            while(resultSet.next()){
+                supplierId.add(resultSet.getString(1));
+            }
+
+            cmbSupId.setItems(supplierId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void loadCmbSupName(){
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT supplier_name FROM supplier");
+            ObservableList<String> supplierName = FXCollections.observableArrayList();
+
+            while(resultSet.next()){
+                supplierName.add(resultSet.getString(1));
+            }
+
+            cmbSupName.setItems(supplierName);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
