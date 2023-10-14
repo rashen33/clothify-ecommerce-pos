@@ -1,4 +1,13 @@
 package edu.icet.controller;
 
-public class ItemController {
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ItemController implements Initializable {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
