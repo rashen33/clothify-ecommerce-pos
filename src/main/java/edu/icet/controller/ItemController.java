@@ -1,11 +1,13 @@
 package edu.icet.controller;
 
 import com.jfoenix.controls.JFXTreeTableView;
+import edu.icet.entity.Item;
 import edu.icet.util.CrudUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeTableColumn;
@@ -13,6 +15,7 @@ import javafx.scene.control.TreeTableColumn;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Currency;
 import java.util.ResourceBundle;
 
 public class ItemController implements Initializable {
@@ -57,6 +60,40 @@ public class ItemController implements Initializable {
     }
 
     public void saveBtn(ActionEvent actionEvent) {
+        Item item = new Item(
+                txtCode.getText(),
+                txtDesc.getText(),
+                Integer.parseInt(txtQty.getText()),
+                Double.parseDouble(txtSellPrice.getText()),
+                Double.parseDouble(txtBuyPrice.getText()),
+                cmbType.getValue().toString(),
+                cmbSize.getValue().toString(),
+                Double.parseDouble(txtProfit.getText().toString()),
+                cmbSupId.getValue().toString());
+
+        try {
+            boolean isAdded = CrudUtil.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?,?,?)",
+                    item.getItemId(),
+                    item.getDesc(),
+                    item.getQty(),
+                    item.getSellingPrice(),
+                    item.getBuyingPrice(),
+                    item.getType(),
+                    item.getSize(),
+                    item.getProfit(),
+                    item.getSupplierId());
+            if(isAdded){
+                new Alert(Alert.AlertType.INFORMATION,"Item Saved..!").show();
+//                clearFields();
+//                loadTable();
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void loadCmbSupId(){
