@@ -43,6 +43,20 @@ public class SupplierController implements Initializable {
         loadCmb();
         generateId();
         loadTable();
+
+        tblSupplier.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->{
+            if(null != newValue){
+                setData((TreeItem<SupplierTm>) newValue);
+            }
+        });
+    }
+
+    public void setData(TreeItem<SupplierTm> value){
+        supID.setText(value.getValue().getSupID());
+        titleCmb.setValue(value.getValue().getTitle());
+        supName.setText(value.getValue().getSupName());
+        supCompany.setText(value.getValue().getSupCompany());
+        supContact.setText(value.getValue().getSupContactNumber());
     }
 
     public void loadCmb(){
@@ -51,7 +65,6 @@ public class SupplierController implements Initializable {
     }
 
     public void clearFields(){
-        supID.clear();
         generateId();
         supName.clear();
         supContact.clear();
@@ -59,7 +72,7 @@ public class SupplierController implements Initializable {
     }
 
     public void saveBtn(ActionEvent actionEvent) {
-        Supplier supplier = new Supplier(supID.getText(), supName.getText(), supContact.getText(), supCompany.getText(),titleCmb.getValue().toString());
+        Supplier supplier = new Supplier(supID.getText(), titleCmb.getValue().toString(), supName.getText(), supContact.getText(), supCompany.getText());
 
         try {
             boolean isAdded = CrudUtil.execute("INSERT INTO supplier VALUES(?,?,?,?,?)",
@@ -72,6 +85,7 @@ public class SupplierController implements Initializable {
             if(isAdded){
                 new Alert(Alert.AlertType.INFORMATION,"Supplier Saved..!").show();
                 clearFields();
+                loadTable();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
             }
@@ -117,16 +131,18 @@ public class SupplierController implements Initializable {
         );
 
         try {
-            boolean isUpdated = CrudUtil.execute("UPDATE customer SET name=? , address=?, salary=? WHERE id=?",
-                    supplier.getSupID(),
+            boolean isUpdated = CrudUtil.execute("UPDATE supplier SET title=? , supplier_name=?, contact_number=?, company=? WHERE id=?",
                     supplier.getTitle(),
+                    supplier.getSupName(),
                     supplier.getSupContactNumber(),
-                    supplier.getSupCompany()
+                    supplier.getSupCompany(),
+                    supplier.getSupID()
             );
 
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"Supplier Updated..!").show();
                 clearFields();
+                loadTable();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
             }
