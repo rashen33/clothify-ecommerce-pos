@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
 import java.util.Arrays;
 
 public class Main extends Application {
@@ -12,9 +13,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/loginPage.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/dashboard.fxml"))));
         stage.show();
         stage.setTitle("Login");
         stage.setResizable(false);
     }
+
+
 }
