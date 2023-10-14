@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SupplierController implements Initializable {
@@ -115,7 +116,6 @@ public class SupplierController implements Initializable {
     }
 
     public void clearBtn(ActionEvent actionEvent) {
-        supID.clear();
         supName.clear();
         supContact.clear();
         supCompany.clear();
@@ -155,6 +155,34 @@ public class SupplierController implements Initializable {
     }
 
     public void deleteBtn(ActionEvent actionEvent) {
+        Supplier supplier = new Supplier(
+                supID.getText(),
+                titleCmb.getValue().toString(),
+                supName.getText(),
+                supContact.getText(),
+                supCompany.getText()
+        );
+        try {
+            boolean isDeleted = CrudUtil.execute("DELETE FROM supplier WHERE id=?",
+                    supplier.getSupID());
+            Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete " + supplier.getSupID() + " customer ? ", ButtonType.YES, ButtonType.NO).showAndWait();
+            if (buttonType.get() == ButtonType.YES){
+                if (isDeleted){
+                    new Alert(Alert.AlertType.INFORMATION,"Supplier Deleted..!").show();
+                    loadTable();
+                    generateId();
+                    clearFields();
+                }else{
+                    new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
     public void loadTable(){
