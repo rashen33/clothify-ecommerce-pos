@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.ItemController">
+<AnchorPane prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.ItemController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1028.0" />
       <Text layoutX="474.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items">
@@ -56,16 +56,16 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="270.0" layoutY="109.0" prefHeight="25.0" prefWidth="159.0" promptText="Item Code" />
-      <TextField layoutX="269.0" layoutY="175.0" prefHeight="25.0" prefWidth="182.0" promptText="Description" />
-      <TextField layoutX="270.0" layoutY="213.0" prefHeight="25.0" prefWidth="52.0" promptText="Qty" />
-      <TextField layoutX="410.0" layoutY="214.0" prefHeight="25.0" prefWidth="62.0" promptText="Add Qty" />
+      <TextField fx:id="txtCode" editable="false" layoutX="270.0" layoutY="109.0" prefHeight="25.0" prefWidth="159.0" promptText="Item Code" />
+      <TextField fx:id="txtDesc" layoutX="269.0" layoutY="175.0" prefHeight="25.0" prefWidth="182.0" promptText="Description" />
+      <TextField fx:id="txtQty" layoutX="270.0" layoutY="213.0" prefHeight="25.0" prefWidth="52.0" promptText="Qty" />
+      <TextField fx:id="txtAddQty" layoutX="410.0" layoutY="214.0" prefHeight="25.0" prefWidth="62.0" promptText="Add Qty" />
       <Label layoutX="341.0" layoutY="215.0" text="Add Qty :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="269.0" layoutY="255.0" prefHeight="25.0" prefWidth="159.0" promptText="Buying Price" />
+      <TextField fx:id="txtBuyPrice" layoutX="269.0" layoutY="255.0" prefHeight="25.0" prefWidth="159.0" promptText="Buying Price" />
       <TextField layoutX="270.0" layoutY="294.0" prefHeight="25.0" prefWidth="159.0" promptText="Search" />
       <Label layoutX="571.0" layoutY="111.0" text="Selling Price :">
          <font>
@@ -87,50 +87,54 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField layoutX="673.0" layoutY="109.0" prefHeight="25.0" prefWidth="159.0" promptText="Selling Price " />
-      <ComboBox layoutX="673.0" layoutY="142.0" prefHeight="25.0" prefWidth="159.0" promptText="Select" />
-      <ComboBox layoutX="673.0" layoutY="175.0" prefHeight="25.0" prefWidth="159.0" promptText="Select" />
-      <TextField layoutX="673.0" layoutY="211.0" prefHeight="25.0" prefWidth="159.0" promptText="Profit" />
-      <ComboBox layoutX="270.0" layoutY="142.0" prefHeight="25.0" prefWidth="93.0" promptText=" Select ID" />
-      <ComboBox layoutX="373.0" layoutY="142.0" prefHeight="25.0" prefWidth="159.0" promptText=" Select Supplier Name" />
+      <TextField fx:id="txtSellPrice" layoutX="673.0" layoutY="109.0" prefHeight="25.0" prefWidth="159.0" promptText="Selling Price " />
+      <ComboBox fx:id="cmbType" layoutX="673.0" layoutY="142.0" prefHeight="25.0" prefWidth="159.0" promptText="Select" />
+      <ComboBox fx:id="cmbSize" layoutX="673.0" layoutY="175.0" prefHeight="25.0" prefWidth="159.0" promptText="Select" />
+      <TextField fx:id="txtProfit" layoutX="673.0" layoutY="211.0" prefHeight="25.0" prefWidth="159.0" promptText="Profit" />
+      <ComboBox fx:id="cmbSupId" layoutX="270.0" layoutY="142.0" prefHeight="25.0" prefWidth="93.0" promptText=" Select ID" />
+      <ComboBox fx:id="cmbSupName" layoutX="373.0" layoutY="142.0" prefHeight="25.0" prefWidth="159.0" promptText=" Select Supplier Name" />
       <Button layoutX="844.0" layoutY="175.0" mnemonicParsing="false" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="625.0" layoutY="282.0" mnemonicParsing="false" text="Print " textFill="WHITE">
+      <Button layoutX="625.0" layoutY="282.0" mnemonicParsing="false" onAction="#printBtn" text="Print " textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="745.0" layoutY="284.0" mnemonicParsing="false" text="Add Stock" textFill="WHITE">
+      <Button layoutX="745.0" layoutY="284.0" mnemonicParsing="false" onAction="#addBtn" text="Add Stock" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="685.0" layoutY="283.0" mnemonicParsing="false" text="Clear" textFill="WHITE">
+      <Button layoutX="685.0" layoutY="283.0" mnemonicParsing="false" onAction="#clearBtn" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="837.0" layoutY="284.0" mnemonicParsing="false" text="Save" textFill="WHITE">
+      <Button layoutX="837.0" layoutY="284.0" mnemonicParsing="false" onAction="#saveBtn" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView layoutX="110.0" layoutY="369.0" prefHeight="399.0" prefWidth="839.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Code" />
-          <TableColumn prefWidth="127.0" text="Description" />
-            <TableColumn prefWidth="74.0" text="Qty" />
-            <TableColumn prefWidth="91.0" text="Selling Price" />
-            <TableColumn prefWidth="91.0" text="Buying Price" />
-            <TableColumn prefWidth="67.0" text="Size" />
-            <TableColumn prefWidth="67.0" text="Type" />
-            <TableColumn prefWidth="67.0" text="Profit" />
-            <TableColumn prefWidth="91.0" text="Supplier ID" />
-            <TableColumn prefWidth="91.0" text="Option" />
-        </columns>
-      </TableView>
+      <JFXTreeTableView fx:id="itemTbl" layoutX="62.0" layoutY="355.0" prefHeight="400.0" prefWidth="887.0">
+         <columns>
+            <TreeTableColumn fx:id="colCod" text="Code" />
+            <TreeTableColumn fx:id="colD" prefWidth="103.0" text="Description" />
+            <TreeTableColumn fx:id="colQty" text="Qty" />
+            <TreeTableColumn fx:id="colSellingPrice" prefWidth="87.0" text="Selling Price" />
+            <TreeTableColumn fx:id="colBuyingPrice" prefWidth="87.0" text="Buying Price" />
+            <TreeTableColumn fx:id="colSize" prefWidth="74.0" text="Size" />
+            <TreeTableColumn fx:id="colType" prefWidth="74.0" text="Type" />
+            <TreeTableColumn fx:id="colProfit" prefWidth="92.0" text="Profit" />
+            <TreeTableColumn fx:id="colSupId" prefWidth="97.0" text="Supplier ID" />
+            <TreeTableColumn fx:id="colOp" prefWidth="111.0" text="Option" />
+            <TreeTableColumn prefWidth="91.0" text="Supplier ID" />
+            <TreeTableColumn prefWidth="91.0" text="Supplier ID" />
+            <TreeTableColumn prefWidth="91.0" text="Supplier ID" />
+            <TreeTableColumn prefWidth="87.0" text="Selling Price" />
+         </columns>
+      </JFXTreeTableView>
    </children>
 </AnchorPane>
