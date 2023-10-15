@@ -64,6 +64,23 @@ public class ItemController implements Initializable {
         loadCmbType();
         loadCmbSize();
         loadTable();
+
+        itemTbl.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->{
+            if(null != newValue){
+                setData((TreeItem<ItemTm>) newValue);
+            }
+        });
+    }
+
+    public void setData(TreeItem<ItemTm> value){
+        txtCode.setText(value.getValue().getItemId());
+        cmbSupId.setValue(value.getValue().getSupplierId());
+        txtDesc.setText(value.getValue().getDesc());
+        txtQty.setText(String.valueOf(value.getValue().getQty()));
+        txtSellPrice.setText(String.valueOf(value.getValue().getSellingPrice()));
+        txtBuyPrice.setText(String.valueOf(value.getValue().getBuyingPrice()));
+        cmbSize.setValue(value.getValue().getSize());
+        cmbType.setValue(value.getValue().getType());
     }
 
     public void loadCmbSupId(){
