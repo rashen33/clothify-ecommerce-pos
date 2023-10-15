@@ -1,22 +1,27 @@
 package edu.icet.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.icet.dto.tm.ItemTm;
+import edu.icet.dto.tm.SupplierTm;
 import edu.icet.entity.Item;
+import edu.icet.entity.Supplier;
 import edu.icet.util.CrudUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Currency;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ItemController implements Initializable {
     public TextField txtCode;
@@ -37,15 +42,28 @@ public class ItemController implements Initializable {
     public TreeTableColumn colType;
     public TreeTableColumn colProfit;
     public TreeTableColumn colSupId;
-    public TreeTableColumn colOp;
     public JFXTreeTableView itemTbl;
+    public TreeTableColumn colOption;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colCod.setCellValueFactory(new TreeItemPropertyValueFactory<>("itemId"));
+        colD.setCellValueFactory(new TreeItemPropertyValueFactory<>("desc"));
+        colQty.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
+        colSellingPrice.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
+        colBuyingPrice.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
+        colSize.setCellValueFactory(new TreeItemPropertyValueFactory<>("buyingPrice"));
+        colType.setCellValueFactory(new TreeItemPropertyValueFactory<>("sellingPrice"));
+        colProfit.setCellValueFactory(new TreeItemPropertyValueFactory<>("type"));
+        colType.setCellValueFactory(new TreeItemPropertyValueFactory<>("size"));
+        colProfit.setCellValueFactory(new TreeItemPropertyValueFactory<>("profit"));
+        colSupId.setCellValueFactory(new TreeItemPropertyValueFactory<>("supplierId"));
+        colOption.setCellValueFactory(new TreeItemPropertyValueFactory<>("btn"));
         generateId();
         loadCmbSupId();
         loadCmbType();
         loadCmbSize();
+        loadTable();
     }
 
     public void loadCmbSupId(){
@@ -64,7 +82,6 @@ public class ItemController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
 
 
     public void loadCmbType(){
@@ -132,7 +149,7 @@ public class ItemController implements Initializable {
             if(isAdded){
                 new Alert(Alert.AlertType.INFORMATION,"Item Saved..!").show();
                 clearFields();
-//                loadTable();
+                loadTable();
             }else{
                 new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
             }
@@ -150,4 +167,78 @@ public class ItemController implements Initializable {
         txtBuyPrice.clear();
         txtSellPrice.clear();
     }
+
+    public void loadTable(){
+        ObservableList<ItemTm> tmList = FXCollections.observableArrayList();
+        List<Item> list = new ArrayList<>();
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT * FROM item");
+            while (resultSet.next()){
+                list.add(new Item(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getDouble(4),
+                        resultSet.getDouble(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getDouble(8),
+                        resultSet.getString(9)
+
+                ));
+            }
+
+            for(Item item : list){
+                JFXButton btn = new JFXButton("Delete");
+                btn.setBackground(Background.fill(Color.rgb(227,92,92)));
+                btn.setTextFill(Color.rgb(255,255,255));
+                btn.setStyle("-fx-font-weight: BOLD");
+
+                btn.setOnAction(actionEvent -> {
+                    try {
+                        boolean isDeleted = CrudUtil.execute("DELETE FROM item WHERE item_id=?",
+                                item.getItemId()
+                        );
+
+                        Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete " + item.getItemId() + " supplier ? ", ButtonType.YES, ButtonType.NO).showAndWait();
+                        if (buttonType.get() == ButtonType.YES){
+                            if (isDeleted){
+                                new Alert(Alert.AlertType.INFORMATION,"Supplier Deleted..!").show();
+                                loadTable();
+                                generateId();
+                            }else{
+                                new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
+                            }
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                tmList.add(new ItemTm(
+                    item.getItemId(),
+                        item.getDesc(),
+                        item.getQty(),
+                        item.getBuyingPrice(),
+                        item.getSellingPrice(),
+                        item.getType(),
+                        item.getSize(),
+                        item.getProfit(),
+                        item.getSupplierId(),
+                        btn
+                ));
+            }
+            RecursiveTreeItem treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
+            itemTbl.setRoot(treeItem);
+            itemTbl.setShowRoot(false);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
