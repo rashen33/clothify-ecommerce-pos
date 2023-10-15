@@ -67,6 +67,7 @@ public class SupplierController implements Initializable {
 
     public void clearFields(){
         generateId();
+        titleCmb.setValue(null);
         supName.clear();
         supContact.clear();
         supCompany.clear();
@@ -181,8 +182,6 @@ public class SupplierController implements Initializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     public void loadTable(){
@@ -213,9 +212,6 @@ public class SupplierController implements Initializable {
             TreeItem<SupplierTm> treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
             tblSupplier.setRoot(treeItem);
             tblSupplier.setShowRoot(false);
-
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
