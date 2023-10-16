@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="edu.icet.controller.SupplierController">
+<AnchorPane prefHeight="810.0" prefWidth="1028.0" style="-fx-background-color: #9EDDFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.SupplierController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1028.0" />
       <Label layoutX="447.0" layoutY="16.0" text="Suppliers">
@@ -61,7 +61,7 @@
       <TextField fx:id="supName" layoutX="220.0" layoutY="183.0" promptText="Name" />
       <TextField fx:id="supContact" layoutX="220.0" layoutY="224.0" promptText="Contact" />
       <TextField fx:id="supCompany" layoutX="219.0" layoutY="266.0" promptText="Company" />
-      <TextField layoutX="220.0" layoutY="306.0" promptText="Search" />
+      <TextField fx:id="txtSearch" layoutX="220.0" layoutY="306.0" promptText="Search" />
       <ComboBox fx:id="titleCmb" layoutX="220.0" layoutY="150.0" prefWidth="150.0" promptText="Select" />
       <Button layoutX="98.0" layoutY="350.0" mnemonicParsing="false" text="Print" textFill="WHITE">
          <font>
@@ -78,11 +78,11 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView layoutX="455.0" layoutY="108.0" prefHeight="270.0" prefWidth="531.0">
+      <TableView fx:id="tblItem" layoutX="455.0" layoutY="108.0" prefHeight="270.0" prefWidth="531.0">
         <columns>
-          <TableColumn prefWidth="100.0" text="Item Code" />
-          <TableColumn prefWidth="325.0" text="Description" />
-            <TableColumn prefWidth="102.0" text="Qty" />
+          <TableColumn fx:id="colItemCode" prefWidth="100.0" text="Item Code" />
+          <TableColumn fx:id="colDesc" prefWidth="325.0" text="Description" />
+            <TableColumn fx:id="colQty" prefWidth="102.0" text="Qty" />
         </columns>
       </TableView>
       <Button layoutX="345.0" layoutY="350.0" mnemonicParsing="false" onAction="#saveBtn" text="Save" textFill="WHITE">
@@ -104,5 +104,10 @@
             <TreeTableColumn fx:id="colCompany" minWidth="0.0" prefWidth="186.0" text="Company" />
          </columns>
       </JFXTreeTableView>
+      <Button layoutX="382.0" layoutY="306.0" mnemonicParsing="false" onAction="#searchBtn" text="Search" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

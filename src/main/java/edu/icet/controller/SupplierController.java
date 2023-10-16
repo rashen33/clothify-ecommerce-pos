@@ -3,6 +3,7 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.icet.dto.tm.SupplierTm;
+import edu.icet.entity.Item;
 import edu.icet.entity.Supplier;
 import edu.icet.util.CrudUtil;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
 import java.net.URL;
@@ -32,6 +34,11 @@ public class SupplierController implements Initializable {
     public TreeTableColumn colName;
     public TreeTableColumn colCompany;
     public TreeTableColumn colContactNo;
+    public TableView tblItem;
+    public TableColumn colItemCode;
+    public TableColumn colDesc;
+    public TableColumn colQty;
+    public TextField txtSearch;
 
 
     @Override
@@ -60,6 +67,7 @@ public class SupplierController implements Initializable {
         supContact.setText(value.getValue().getSupContactNumber());
     }
 
+
     public void loadCmb(){
         ObservableList<String> obs = FXCollections.observableArrayList("Mr.", "Mrs.");
         titleCmb.getItems().addAll(obs);
@@ -75,7 +83,6 @@ public class SupplierController implements Initializable {
 
     public void saveBtn(ActionEvent actionEvent) {
         Supplier supplier = new Supplier(supID.getText(), titleCmb.getValue().toString(), supName.getText(), supContact.getText(), supCompany.getText());
-
         try {
             boolean isAdded = CrudUtil.execute("INSERT INTO supplier VALUES(?,?,?,?,?)",
                         supplier.getSupID(),
@@ -117,9 +124,11 @@ public class SupplierController implements Initializable {
     }
 
     public void clearBtn(ActionEvent actionEvent) {
+        titleCmb.setValue(null);
         supName.clear();
         supContact.clear();
         supCompany.clear();
+        txtSearch.clear();
     }
 
     public void updateBtn(ActionEvent actionEvent) {
@@ -212,6 +221,61 @@ public class SupplierController implements Initializable {
             TreeItem<SupplierTm> treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
             tblSupplier.setRoot(treeItem);
             tblSupplier.setShowRoot(false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void loadItemTbl(String supID){
+        ObservableList<Item> list = FXCollections.observableArrayList();
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT * FROM item WHERE supplier_id = '" + supID + "'");
+
+            while (resultSet.next()) {
+                list.add(new Item(
+                        resultSet.getString("item_id"),
+                        resultSet.getString("description"),
+                        resultSet.getInt("qty"),
+                        resultSet.getDouble("buying_price"),
+                        resultSet.getDouble("selling_price"),
+                        resultSet.getString("type"),
+                        resultSet.getString("size"),
+                        resultSet.getDouble("profit"),
+                        resultSet.getString("supplier_id")
+                ));
+            }
+            tblItem.setItems(list);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void searchBtn(ActionEvent actionEvent) {
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("item_id"));
+        colDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        String supId = txtSearch.getText();
+        loadItemTbl(supId);
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT * FROM supplier WHERE id = '"+supId+"'");
+            if(resultSet.next()){
+                Supplier supplier = new Supplier(
+                        resultSet.getString("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("supplier_name"),
+                        resultSet.getString("contact_number"),
+                        resultSet.getString("company")
+                );
+                supID.setText(supplier.getSupID());
+                supName.setText(supplier.getSupName());
+                titleCmb.setValue(supplier.getTitle());
+                supContact.setText(supplier.getSupContactNumber());
+                supCompany.setText(supplier.getSupCompany());
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Supplier not found").show();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
