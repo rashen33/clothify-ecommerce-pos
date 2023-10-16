@@ -20,5 +20,4 @@ public class ItemTm extends RecursiveTreeObject<ItemTm> {
     private String size;
     private double profit;
     private String supplierId;
-    private JFXButton btn;
 }

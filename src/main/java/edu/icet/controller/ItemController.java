@@ -45,70 +45,67 @@ public class ItemController implements Initializable {
     public JFXTreeTableView itemTbl;
     public TreeTableColumn colOption;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colCod.setCellValueFactory(new TreeItemPropertyValueFactory<>("itemId"));
         colD.setCellValueFactory(new TreeItemPropertyValueFactory<>("desc"));
         colQty.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
-        colSellingPrice.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
-        colBuyingPrice.setCellValueFactory(new TreeItemPropertyValueFactory<>("qty"));
-        colSize.setCellValueFactory(new TreeItemPropertyValueFactory<>("buyingPrice"));
-        colType.setCellValueFactory(new TreeItemPropertyValueFactory<>("sellingPrice"));
-        colProfit.setCellValueFactory(new TreeItemPropertyValueFactory<>("type"));
-        colType.setCellValueFactory(new TreeItemPropertyValueFactory<>("size"));
+        colSellingPrice.setCellValueFactory(new TreeItemPropertyValueFactory<>("buyingPrice"));
+        colBuyingPrice.setCellValueFactory(new TreeItemPropertyValueFactory<>("sellingPrice"));
+        colType.setCellValueFactory(new TreeItemPropertyValueFactory<>("type"));
+        colSize.setCellValueFactory(new TreeItemPropertyValueFactory<>("size"));
         colProfit.setCellValueFactory(new TreeItemPropertyValueFactory<>("profit"));
         colSupId.setCellValueFactory(new TreeItemPropertyValueFactory<>("supplierId"));
-        colOption.setCellValueFactory(new TreeItemPropertyValueFactory<>("btn"));
         generateId();
+        loadCmbSize();
         loadCmbSupId();
         loadCmbType();
-        loadCmbSize();
         loadTable();
-
-        itemTbl.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->{
-            if(null != newValue){
-                setData((TreeItem<ItemTm>) newValue);
-            }
-        });
     }
 
-    public void setData(TreeItem<ItemTm> value){
-        txtCode.setText(value.getValue().getItemId());
-        cmbSupId.setValue(value.getValue().getSupplierId());
-        txtDesc.setText(value.getValue().getDesc());
-        txtQty.setText(String.valueOf(value.getValue().getQty()));
-        txtSellPrice.setText(String.valueOf(value.getValue().getSellingPrice()));
-        txtBuyPrice.setText(String.valueOf(value.getValue().getBuyingPrice()));
-        cmbSize.setValue(value.getValue().getSize());
-        cmbType.setValue(value.getValue().getType());
+    public void printBtn(ActionEvent actionEvent) {
     }
 
-    public void loadCmbSupId(){
+    public void addBtn(ActionEvent actionEvent) {
+        double profit = Double.parseDouble(txtSellPrice.getText()) - Double.parseDouble(txtBuyPrice.getText());
+        Item item = new Item(
+                txtCode.getText(),
+                txtDesc.getText(),
+                Integer.parseInt(txtQty.getText()),
+                Double.parseDouble(txtBuyPrice.getText()),
+                Double.parseDouble(txtSellPrice.getText()),
+                cmbType.getValue().toString(),
+                cmbSize.getValue().toString(),
+                profit,
+                cmbSupId.getValue().toString()
+        );
+
         try {
-            ResultSet resultSet = CrudUtil.execute("SELECT id FROM supplier");
-            ObservableList<String> supplierId = FXCollections.observableArrayList();
+            boolean isAdded = CrudUtil.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?,?,?)",
+                    item.getItemId(),
+                    item.getDesc(),
+                    item.getQty(),
+                    item.getBuyingPrice(),
+                    item.getSellingPrice(),
+                    item.getType(),
+                    item.getSize(),
+                    item.getProfit(),
+                    item.getSupplierId()
+            );
 
-            while(resultSet.next()){
-                supplierId.add(resultSet.getString(1));
+            if(isAdded){
+                new Alert(Alert.AlertType.INFORMATION,"Item Saved..!").show();
+                clearFields();
+                loadTable();
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
             }
-
-            cmbSupId.setItems(supplierId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    public void loadCmbType(){
-        ObservableList<String> obs = FXCollections.observableArrayList("Male", "Female", "Kids");
-        cmbType.getItems().addAll(obs);
-    }
-
-    public void loadCmbSize(){
-        ObservableList<String> obs = FXCollections.observableArrayList("Small", "Medium","Large");
-        cmbSize.getItems().addAll(obs);
     }
 
     private void generateId() {
@@ -129,47 +126,16 @@ public class ItemController implements Initializable {
         }
     }
 
-    public void printBtn(ActionEvent actionEvent) {
-    }
-
-    public void addBtn(ActionEvent actionEvent) {
-    }
-
-    public void clearBtn(ActionEvent actionEvent) {
-        clearFields();
-    }
-
-    public void saveBtn(ActionEvent actionEvent) {
-        double profit = Double.parseDouble(txtSellPrice.getText()) - Double.parseDouble(txtBuyPrice.getText());
-        Item item = new Item(
-                txtCode.getText(),
-                txtDesc.getText(),
-                Integer.parseInt(txtQty.getText()),
-                Double.parseDouble(txtSellPrice.getText()),
-                Double.parseDouble(txtBuyPrice.getText()),
-                cmbType.getValue().toString(),
-                cmbSize.getValue().toString(),
-                profit,
-                cmbSupId.getValue().toString());
-
+    public void loadCmbSupId(){
         try {
-            boolean isAdded = CrudUtil.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?,?,?)",
-                    item.getItemId(),
-                    item.getDesc(),
-                    item.getQty(),
-                    item.getSellingPrice(),
-                    item.getBuyingPrice(),
-                    item.getType(),
-                    item.getSize(),
-                    item.getProfit(),
-                    item.getSupplierId());
-            if(isAdded){
-                new Alert(Alert.AlertType.INFORMATION,"Item Saved..!").show();
-                clearFields();
-                loadTable();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
+            ResultSet resultSet = CrudUtil.execute("SELECT id FROM supplier");
+            ObservableList<String> supplierId = FXCollections.observableArrayList();
+
+            while(resultSet.next()){
+                supplierId.add(resultSet.getString(1));
             }
+
+            cmbSupId.setItems(supplierId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -179,18 +145,35 @@ public class ItemController implements Initializable {
 
     public void clearFields(){
         generateId();
+        txtCode.clear();
         txtDesc.clear();
         txtQty.clear();
         txtBuyPrice.clear();
         txtSellPrice.clear();
+        cmbType.setValue(null);
+        cmbSize.setValue(null);
+        cmbSupId.setValue(null);
+    }
+
+
+    public void loadCmbType(){
+        ObservableList<String> obs = FXCollections.observableArrayList("Male", "Female", "Kids");
+        cmbType.getItems().addAll(obs);
+    }
+
+    public void loadCmbSize(){
+        ObservableList<String> obs = FXCollections.observableArrayList("Small", "Medium","Large");
+        cmbSize.getItems().addAll(obs);
     }
 
     public void loadTable(){
         ObservableList<ItemTm> tmList = FXCollections.observableArrayList();
         List<Item> list = new ArrayList<>();
+
         try {
             ResultSet resultSet = CrudUtil.execute("SELECT * FROM item");
-            while (resultSet.next()){
+
+            while(resultSet.next()){
                 list.add(new Item(
                         resultSet.getString(1),
                         resultSet.getString(2),
@@ -201,40 +184,12 @@ public class ItemController implements Initializable {
                         resultSet.getString(7),
                         resultSet.getDouble(8),
                         resultSet.getString(9)
-
                 ));
             }
 
             for(Item item : list){
-                JFXButton btn = new JFXButton("Delete");
-                btn.setBackground(Background.fill(Color.rgb(227,92,92)));
-                btn.setTextFill(Color.rgb(255,255,255));
-                btn.setStyle("-fx-font-weight: BOLD");
-
-                btn.setOnAction(actionEvent -> {
-                    try {
-                        boolean isDeleted = CrudUtil.execute("DELETE FROM item WHERE item_id=?",
-                                item.getItemId()
-                        );
-
-                        Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete " + item.getItemId() + " supplier ? ", ButtonType.YES, ButtonType.NO).showAndWait();
-                        if (buttonType.get() == ButtonType.YES){
-                            if (isDeleted){
-                                new Alert(Alert.AlertType.INFORMATION,"Supplier Deleted..!").show();
-                                loadTable();
-                                generateId();
-                            }else{
-                                new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
-                            }
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
                 tmList.add(new ItemTm(
-                    item.getItemId(),
+                        item.getItemId(),
                         item.getDesc(),
                         item.getQty(),
                         item.getBuyingPrice(),
@@ -242,20 +197,23 @@ public class ItemController implements Initializable {
                         item.getType(),
                         item.getSize(),
                         item.getProfit(),
-                        item.getSupplierId(),
-                        btn
+                        item.getSupplierId()
                 ));
             }
-            RecursiveTreeItem treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
+            TreeItem<ItemTm> treeItem = new RecursiveTreeItem<>(tmList, RecursiveTreeObject::getChildren);
             itemTbl.setRoot(treeItem);
             itemTbl.setShowRoot(false);
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public void clearBtn(ActionEvent actionEvent) {
+    }
+
+    public void saveBtn(ActionEvent actionEvent) {
     }
 
 }

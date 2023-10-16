@@ -48,8 +48,8 @@ public class SupplierController implements Initializable {
         colName.setCellValueFactory(new TreeItemPropertyValueFactory<>("supName"));
         colCompany.setCellValueFactory(new TreeItemPropertyValueFactory<>("supCompany"));
         colContactNo.setCellValueFactory(new TreeItemPropertyValueFactory<>("supContactNumber"));
-        loadCmb();
         generateId();
+        loadCmb();
         loadTable();
 
         tblSupplier.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->{

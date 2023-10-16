@@ -111,7 +111,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <JFXTreeTableView fx:id="itemTbl" layoutX="62.0" layoutY="355.0" prefHeight="400.0" prefWidth="887.0">
+      <JFXTreeTableView fx:id="itemTbl" layoutX="124.0" layoutY="345.0" prefHeight="393.0" prefWidth="779.0">
          <columns>
             <TreeTableColumn fx:id="colCod" text="Code" />
             <TreeTableColumn fx:id="colD" prefWidth="103.0" text="Description" />
@@ -122,7 +122,6 @@
             <TreeTableColumn fx:id="colType" prefWidth="74.0" text="Type" />
             <TreeTableColumn fx:id="colProfit" prefWidth="92.0" text="Profit" />
             <TreeTableColumn fx:id="colSupId" prefWidth="97.0" text="Supplier ID" />
-            <TreeTableColumn fx:id="colOption" prefWidth="108.800048828125" text="Option" />
          </columns>
       </JFXTreeTableView>
    </children>
