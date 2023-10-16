@@ -257,7 +257,7 @@ public class SupplierController implements Initializable {
         colDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         String supId = txtSearch.getText();
-        loadItemTbl(supId);
+//        loadItemTbl(supId);
         try {
             ResultSet resultSet = CrudUtil.execute("SELECT * FROM supplier WHERE id = '"+supId+"'");
             if(resultSet.next()){
