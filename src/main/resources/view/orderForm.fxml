@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -65,7 +64,6 @@
       <TextField fx:id="txtCostName" layoutX="232.0" layoutY="156.0" prefHeight="25.0" prefWidth="175.0" promptText="Customer Name" />
       <TextField fx:id="txtContNumber" layoutX="232.0" layoutY="188.0" prefHeight="25.0" prefWidth="175.0" promptText="Contact Number" />
       <TextField fx:id="txtEmail" layoutX="232.0" layoutY="220.0" prefHeight="25.0" prefWidth="175.0" promptText="Email" />
-      <DatePicker fx:id="txtDate" layoutX="232.0" layoutY="253.0" prefHeight="25.0" prefWidth="175.0" promptText="Date" />
       <TextField fx:id="txtEmpName" layoutX="330.0" layoutY="126.0" promptText="Employee Name" />
       <ComboBox fx:id="cmbEmpId" layoutX="234.0" layoutY="126.0" prefHeight="25.0" prefWidth="91.0" promptText="Select ID" />
       <Label layoutX="547.0" layoutY="128.0" text="Item Code :">
@@ -122,7 +120,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtDiscout" layoutX="642.0" layoutY="283.0" prefHeight="25.0" prefWidth="95.0" promptText="0.00" />
+      <TextField fx:id="txtDiscount" layoutX="642.0" layoutY="283.0" prefHeight="25.0" prefWidth="95.0" promptText="0.00" />
       <Button layoutX="611.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnRemoveOrder" stylesheets="@styles.css" text="Remove Oder" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -187,6 +185,7 @@
       <Text layoutX="491.0" layoutY="772.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" />
       <Text layoutX="644.0" layoutY="772.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000" />
       <TextField fx:id="txtOrderId" editable="false" layoutX="232.0" layoutY="92.0" promptText="Order ID" />
-      <ComboBox fx:id="cmbPayMethod" layoutX="233.0" layoutY="283.0" prefHeight="25.0" prefWidth="181.0" promptText="Select Payment Method" />
+      <ComboBox fx:id="cmbPayMethod" layoutX="233.0" layoutY="283.0" prefHeight="25.0" prefWidth="175.0" promptText="Select Payment Method" />
+      <TextField fx:id="txtDate" layoutX="232.0" layoutY="253.0" prefHeight="25.0" prefWidth="175.0" promptText="Date" />
    </children>
 </AnchorPane>

@@ -1,15 +1,24 @@
 package edu.icet.controller;
 
+import edu.icet.util.CrudUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class OrderController {
+import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+public class OrderController implements Initializable {
     public TextField txtCostName;
     public TextField txtContNumber;
     public TextField txtEmail;
-    public DatePicker txtDate;
+    public TextField txtDate;
     public TextField txtEmpName;
     public ComboBox cmbEmpId;
     public TextField txtItemName;
@@ -23,6 +32,49 @@ public class OrderController {
     public TextField txtSize;
     public TextField txtOrderId;
     public ComboBox cmbPayMethod;
+    public TextField txtDiscount;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadCmbEmployeeId();
+        cmbEmpId.setOnAction(actionEvent -> {
+            setEmployeeName();
+        });
+
+    }
+
+    private void setEmployeeName(){
+        String empId = cmbEmpId.getValue().toString();
+
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT name FROM employee where id = '"+empId+"'");
+            while(resultSet.next()){
+                String empName = resultSet.getString(1);
+                txtEmpName.setText(empName);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void loadCmbEmployeeId(){
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT id FROM employee");
+            ObservableList<String> employeeId = FXCollections.observableArrayList();
+
+            while(resultSet.next()){
+                employeeId.add(resultSet.getString(1));
+            }
+            cmbEmpId.setItems(employeeId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void btnRemoveOrder(ActionEvent actionEvent) {
     }
@@ -38,4 +90,7 @@ public class OrderController {
 
     public void btnPlaceOrder(ActionEvent actionEvent) {
     }
+
+
+
 }
