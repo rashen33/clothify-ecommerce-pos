@@ -1,41 +1,63 @@
 
-g	java:S112G"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Û¥ÈÒ²1
-g	java:S112I"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Û¥ÈÒ²1
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Û¥ÈÒ²1
-h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Û¥ÈÒ²1
-h	java:S112¨"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Û¥ÈÒ²1
-h	java:S112ª"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ü¥ÈÒ²1
+g	java:S112f"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ñìÃ¼³1
+g	java:S112h"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112¡"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112£"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112¾"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112À"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112á"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112ã"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112û"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8òìÃ¼³1
+h	java:S112˜"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8óìÃ¼³1
+h	java:S112š"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8óìÃ¼³1
 Q
-java:S3740"/Provide the parametrized type for this generic.(Â†½úøÿÿÿÿ8Ü¥ÈÒ²1
-L
-java:S3740"/Provide the parametrized type for this generic.(ìÒÑŒ8Ü¥ÈÒ²1
-L
-java:S3740"/Provide the parametrized type for this generic.(ãÔ³Ó8Ü¥ÈÒ²1
+java:S3740"/Provide the parametrized type for this generic.(Â†½úøÿÿÿÿ8¡Ô¼¼³1
 K
-java:S3740"/Provide the parametrized type for this generic.(™—E8Ü¥ÈÒ²1
-Q
-java:S3740"/Provide the parametrized type for this generic.(ÊÚÎ¨ùÿÿÿÿ8Ü¥ÈÒ²1
-Q
-java:S3740"/Provide the parametrized type for this generic.(°Äˆ´ÿÿÿÿÿ8Ü¥ÈÒ²1
+java:S3740"/Provide the parametrized type for this generic.(ÍÄ-8¡Ô¼¼³1
 L
-java:S3740"/Provide the parametrized type for this generic.(Ş˜ıÚ8Ü¥ÈÒ²1
+java:S3740 "/Provide the parametrized type for this generic.(ï‡€®8¡Ô¼¼³1
+Q
+java:S3740!"/Provide the parametrized type for this generic.(Ä›¡øÿÿÿÿ8¡Ô¼¼³1
+Q
+java:S3740""/Provide the parametrized type for this generic.(¸ç€˜ÿÿÿÿÿ8¡Ô¼¼³1
+Q
+java:S3740#"/Provide the parametrized type for this generic.(‡§²¹ùÿÿÿÿ8¡Ô¼¼³1
+Q
+java:S3740$"/Provide the parametrized type for this generic.(€ı¤‹úÿÿÿÿ8¡Ô¼¼³1
 L
-java:S3740"/Provide the parametrized type for this generic.(ºçÎ´8Ü¥ÈÒ²1
-¤
-java:S1186…"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(©«îåüÿÿÿÿ8õ¥ÈÒ²1
+java:S3740%"/Provide the parametrized type for this generic.(‡¾8¡Ô¼¼³1
+Q
+java:S3740&"/Provide the parametrized type for this generic.(Òª„ûÿÿÿÿ8¢Ô¼¼³1
+L
+java:S3740'"/Provide the parametrized type for this generic.(îİ§Å8¢Ô¼¼³1
+Q
+java:S3740("/Provide the parametrized type for this generic.(‰å¾…úÿÿÿÿ8¢Ô¼¼³1
+t
+java:S1192c"XDefine a constant instead of duplicating this literal "Something went wrong..!" 3 times.(›Ö¹~8ôìÃ¼³1
+w
+java:S3655³"TCall "buttonType.isPresent()" or "!buttonType.isEmpty()" before accessing the value.(²Ôûøùÿÿÿÿ8•íÃ¼³1
 T
-java:S11725"2Remove this unused method parameter "actionEvent".(ì¬îşÿÿÿÿ8ø¥ÈÒ²1
-a
-java:S2147H"DCombine this catch with the one at line 70, which has the same body.(ıàÑÎ8ù¥ÈÒ²1
-a
-java:S2147Z"DCombine this catch with the one at line 88, which has the same body.(ıàÑÎ8û¥ÈÒ²1
+java:S1172T"2Remove this unused method parameter "actionEvent".(ì¬îşÿÿÿÿ8›íÃ¼³1
+b
+java:S2147g"ECombine this catch with the one at line 101, which has the same body.(ıàÑÎ8›íÃ¼³1
+b
+java:S2147y"ECombine this catch with the one at line 119, which has the same body.(ıàÑÎ8íÃ¼³1
 W
-java:S6397R"5Replace this character class by the character itself.(²í­íüÿÿÿÿ8ü¥ÈÒ²1
+java:S6397q"5Replace this character class by the character itself.(²í­íüÿÿÿÿ8íÃ¼³1
 T
-java:S1172_"2Remove this unused method parameter "actionEvent".(½ù”ëıÿÿÿÿ8ü¥ÈÒ²1
-T
-java:S1172f"2Remove this unused method parameter "actionEvent".(¦ÅÌıÿÿÿÿ8ı¥ÈÒ²1
+java:S1172~"2Remove this unused method parameter "actionEvent".(½ù”ëıÿÿÿÿ8íÃ¼³1
+U
+java:S1172†"2Remove this unused method parameter "actionEvent".(¦ÅÌıÿÿÿÿ8ŸíÃ¼³1
 c
-java:S2147€"ECombine this catch with the one at line 126, which has the same body.(ıàÑÎ8ş¥ÈÒ²1
+java:S2147¢"ECombine this catch with the one at line 160, which has the same body.(ıàÑÎ8ŸíÃ¼³1
+U
+java:S1172§"2Remove this unused method parameter "actionEvent".(©«îåüÿÿÿÿ8¡íÃ¼³1
 c
-java:S2147©"ECombine this catch with the one at line 167, which has the same body.(ıàÑÎ8€¦ÈÒ²1
+java:S2147¿"ECombine this catch with the one at line 189, which has the same body.(ıàÑÎ8¡íÃ¼³1
+c
+java:S2147â"ECombine this catch with the one at line 224, which has the same body.(ıàÑÎ8£íÃ¼³1
+P
+java:S1172ÿ"2Remove this unused method parameter "actionEvent".(„ÏÇ 8¦íÃ¼³1
+c
+java:S2147™"ECombine this catch with the one at line 279, which has the same body.(ıàÑÎ8§íÃ¼³1
+^	java:S125„"<This block of commented-out lines of code should be removed.(Õ—Ò‘ÿÿÿÿÿ8§íÃ¼³1
