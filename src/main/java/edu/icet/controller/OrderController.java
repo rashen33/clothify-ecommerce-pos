@@ -22,7 +22,7 @@ public class OrderController implements Initializable {
     public TextField txtEmpName;
     public ComboBox cmbEmpId;
     public TextField txtItemName;
-    public ComboBox txtItemCode;
+    public ComboBox cmbItemCode;
     public TextField txtDes;
     public TextField txtQty;
     public TextField txtQonHand;
@@ -41,6 +41,43 @@ public class OrderController implements Initializable {
             setEmployeeName();
         });
 
+        loadCmbItemId();
+        cmbItemCode.setOnAction(actionEvent -> {
+            setItemName();
+        });
+
+    }
+
+    private void loadCmbItemId() {
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT item_id FROM item");
+            ObservableList<String> itemId = FXCollections.observableArrayList();
+
+            while(resultSet.next()){
+                itemId.add(resultSet.getString(1));
+            }
+            cmbItemCode.setItems(itemId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setItemName() {
+        String itemId = cmbItemCode.getValue().toString();
+
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT description FROM item where item_id = '"+itemId+"'");
+            while(resultSet.next()){
+                String itemName = resultSet.getString(1);
+                txtItemName.setText(itemName);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setEmployeeName(){
