@@ -1,6 +1,9 @@
 package edu.icet.controller;
 
 import edu.icet.util.CrudUtil;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,10 +11,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class OrderController implements Initializable {
@@ -46,6 +52,19 @@ public class OrderController implements Initializable {
             setItemName();
         });
 
+        loadCmbPaymentMethod();
+        setDate();
+
+    }
+
+    private void setDate() {
+        Timeline date = new Timeline(new KeyFrame(
+                Duration.ZERO,
+                actionEvent -> txtDate.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+        ), new KeyFrame(Duration.seconds(1)));
+
+        date.setCycleCount(Animation.INDEFINITE);
+        date.play();
     }
 
     private void loadCmbItemId() {
@@ -110,6 +129,11 @@ public class OrderController implements Initializable {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void loadCmbPaymentMethod(){
+        ObservableList<String> obs = FXCollections.observableArrayList("Cash", "Card");
+        cmbPayMethod.getItems().addAll(obs);
     }
 
 
