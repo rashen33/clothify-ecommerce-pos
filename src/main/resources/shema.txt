@@ -1,0 +1,75 @@
+CREATE DATABASE clothify_store;
+
+USE  clothify_store;
+
+CREATE TABLE supplier (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255),
+    supplier_name VARCHAR(255),
+    contact_number VARCHAR(255),
+    company VARCHAR(255)
+);
+
+CREATE TABLE item (
+    item_id VARCHAR(10) PRIMARY KEY,
+    description VARCHAR(255),
+    qty INT,
+    buying_price DECIMAL(10, 2),
+    selling_price DECIMAL(10, 2),
+    type VARCHAR(50),
+    size VARCHAR(20),
+    profit DECIMAL(10, 2),
+    supplier_id VARCHAR(255),
+    FOREIGN KEY (supplier_id) REFERENCES supplier(id)
+);
+
+INSERT INTO supplier (id, title, supplier_name, contact_number, company)
+VALUES
+    ('S008', 'Mr.', 'John Doe', '+94771234567', 'ABC Company (Pvt) Ltd.'),
+    ('S009', 'Mrs.', 'Jane Smith', '+94772345678', 'XYZ Inc. (Pvt) Ltd.'),
+    ('S010', 'Miss', 'David Johnson', '+94773456789', 'LMN Enterprises (Pvt) Ltd.'),
+    ('S011', 'Mr.', 'Emily Davis', '+94774567890', 'PQR Innovations (Pvt) Ltd.'),
+    ('S012', 'Mrs.', 'Robert Brown', '+94775678901', 'DEF Corporation (Pvt) Ltd.'),
+    ('S013', 'Mr.', 'Sarah Lee', '+94776789012', 'GHI Holdings (Pvt) Ltd.'),
+    ('S014', 'Mrs.', 'Michael Wilson', '+94777890123', 'JKL Solutions (Pvt) Ltd.'),
+    ('S015', 'Miss', 'Linda Harris', '+94778901234', 'RST Enterprises (Pvt) Ltd.'),
+    ('S016', 'Mr.', 'William Turner', '+94779012345', 'UVW Innovations (Pvt) Ltd.'),
+    ('S017', 'Mr.', 'Patricia Martinez', '+94770123456', 'MNO Corporation (Pvt) Ltd.'),
+    ('S018', 'Miss', 'Christopher Clark', '+94771234567', 'XYZ Inc. (Pvt) Ltd.'),
+    ('S019', 'Mrs.', 'Daniel Walker', '+94772345678', 'ABC Company (Pvt) Ltd.'),
+    ('S020', 'Mr.', 'Linda Allen', '+94773456789', 'PQR Innovations (Pvt) Ltd.'),
+    ('S021', 'Mr.', 'Jennifer White', '+94774567890', 'LMN Enterprises (Pvt) Ltd.'),
+    ('S022', 'Miss', 'Paul King', '+94775678901', 'GHI Holdings (Pvt) Ltd.'),
+    ('S023', 'Mr.', 'Susan Harris', '+94776789012', 'DEF Corporation (Pvt) Ltd.'),
+    ('S024', 'Mrs.', 'Kevin Lewis', '+94777890123', 'JKL Solutions (Pvt) Ltd.'),
+    ('S025', 'Miss', 'Andrew Scott', '+94778901234', 'RST Enterprises (Pvt) Ltd.'),
+    ('S026', 'Mr.', 'Maria Young', '+94779012345', 'UVW Innovations (Pvt) Ltd.'),
+    ('S027', 'Mr.', 'Lisa Thomas', '+94770123456', 'MNO Corporation (Pvt) Ltd.');
+
+CREATE TABLE employee (
+    id VARCHAR(5) PRIMARY KEY,
+    title VARCHAR(50),
+    name VARCHAR(100),
+    nic VARCHAR(12),
+    dob VARCHAR(10),
+    address VARCHAR(255),
+    contact VARCHAR(15),
+    bank_acc_no VARCHAR(20),
+    bank_branch VARCHAR(100)
+);
+
+INSERT INTO employee (id, title, name, nic, dob, address, contact, bank_acc_no, bank_branch)
+VALUES
+    ('E001', 'Mr.', 'John Doe', '900123456V', '1980-05-15', '123 Main St, Colombo', '+94711234567', '1234567890', 'Colombo Branch'),
+    ('E002', 'Mr.', 'Jane Smith', '811234567W', '1985-08-20', '456 Galle Rd, Kandy', '+94722345678', '2345678901', 'Kandy Branch'),
+    ('E003', 'Mr.', 'Alice Johnson', '925678901X', '1990-03-10', '789 Negombo Rd, Galle', '+94733456789', '3456789012', 'Galle Branch'),
+    ('E004', 'Mr.', 'Robert Brown', '840123456Y', '1975-01-25', '23 High St, Jaffna', '+94744456789', '4567890123', 'Jaffna Branch'),
+    ('E005', 'Mr.', 'Linda Davis', '770123456Z', '1992-11-05', '567 Park St, Matara', '+94755567890', '5678901234', 'Matara Branch'),
+    ('E006', 'Mr.', 'Michael Wilson', '880123456A', '1988-04-30', '789 Beach Rd, Negombo', '+94766678901', '6789012345', 'Negombo Branch'),
+    ('E007', 'Mr.', 'Sarah Lee', '960123456B', '1976-07-12', '12 Hill St, Anuradhapura', '+94777789012', '7890123456', 'Anuradhapura Branch'),
+    ('E008', 'Mr.', 'David Taylor', '850123456C', '1982-12-03', '45 Lake Rd, Trincomalee', '+94788890123', '8901234567', 'Trincomalee Branch'),
+    ('E009', 'Mr.', 'Emily Anderson', '910123456D', '1986-09-18', '34 River Rd, Batticaloa', '+94799901234', '9012345678', 'Batticaloa Branch'),
+    ('E010', 'Mr.', 'James Martin', '800123456E', '1970-04-22', '67 Forest St, Badulla', '+94700012345', '0123456789', 'Badulla Branch');
+
+
+    
