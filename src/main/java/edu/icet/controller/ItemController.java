@@ -43,8 +43,6 @@ public class ItemController implements Initializable {
     public TreeTableColumn colProfit;
     public TreeTableColumn colSupId;
     public JFXTreeTableView itemTbl;
-    public TreeTableColumn colOption;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,6 +60,23 @@ public class ItemController implements Initializable {
         loadCmbSupId();
         loadCmbType();
         loadTable();
+
+        itemTbl.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) ->{
+            if(null != newValue){
+                setData((TreeItem<ItemTm>) newValue);
+            }
+        });
+    }
+
+    public void setData(TreeItem<ItemTm> value){
+        txtCode.setText(value.getValue().getItemId());
+        cmbSupId.setValue(value.getValue().getSupplierId());
+        txtDesc.setText(value.getValue().getDesc());
+        txtQty.setText(String.valueOf(value.getValue().getQty()));
+        txtSellPrice.setText(String.valueOf(value.getValue().getSellingPrice()));
+        txtBuyPrice.setText(String.valueOf(value.getValue().getBuyingPrice()));
+        cmbSize.setValue(value.getValue().getSize().toString());
+        cmbType.setValue(value.getValue().getType().toString());
     }
 
     public void printBtn(ActionEvent actionEvent) {
@@ -113,11 +128,11 @@ public class ItemController implements Initializable {
             ResultSet resultSet = CrudUtil.execute("SELECT item_id FROM item ORDER BY item_id DESC LIMIT 1");
 
             if (resultSet.next()){
-                int num = Integer.parseInt(resultSet.getString(1).split("[S]")[1]);
+                int num = Integer.parseInt(resultSet.getString(1).split("[I]")[1]);
                 num++;
-                txtCode.setText(String.format("S%03d",num));
+                txtCode.setText(String.format("I%03d",num));
             }else {
-                txtCode.setText("S001");
+                txtCode.setText("I001");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -211,9 +226,51 @@ public class ItemController implements Initializable {
     }
 
     public void clearBtn(ActionEvent actionEvent) {
+        generateId();
+        txtCode.clear();
+        txtDesc.clear();
+        txtQty.clear();
+        txtBuyPrice.clear();
+        txtSellPrice.clear();
+        cmbType.setValue(null);
+        cmbSize.setValue(null);
+        cmbSupId.setValue(null);
     }
 
     public void saveBtn(ActionEvent actionEvent) {
     }
 
+    public void deleteBtn(ActionEvent actionEvent) {
+        double profit = Double.parseDouble(txtSellPrice.getText()) - Double.parseDouble(txtBuyPrice.getText());
+        Item item = new Item(
+                txtCode.getText(),
+                txtDesc.getText(),
+                Integer.parseInt(txtQty.getText()),
+                Double.parseDouble(txtBuyPrice.getText()),
+                Double.parseDouble(txtSellPrice.getText()),
+                cmbType.getValue().toString(),
+                cmbSize.getValue().toString(),
+                profit,
+                cmbSupId.getValue().toString()
+        );
+        try {
+            boolean isDeleted = CrudUtil.execute("DELETE FROM item WHERE item_id=?",
+                    item.getItemId());
+            Optional<ButtonType> buttonType = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete " + item.getItemId() + " customer ? ", ButtonType.YES, ButtonType.NO).showAndWait();
+            if (buttonType.get() == ButtonType.YES){
+                if (isDeleted){
+                    new Alert(Alert.AlertType.INFORMATION,"Item Deleted..!").show();
+                    loadTable();
+                    generateId();
+                    clearFields();
+                }else{
+                    new Alert(Alert.AlertType.ERROR,"Something went wrong..!").show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
