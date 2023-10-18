@@ -43,14 +43,13 @@ public class OrderController implements Initializable {
 
         loadCmbPaymentMethod();
         setDate();
-//        generateId();
+        generateId();
 
     }
-    //test
 
     private void generateId() {
         try {
-            ResultSet resultSet = CrudUtil.execute("SELECT order_id FROM orders ORDER BY id DESC LIMIT 1");
+            ResultSet resultSet = CrudUtil.execute("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
 
             if (resultSet.next()){
                 int num = Integer.parseInt(resultSet.getString(1).split("[O]")[1]);
