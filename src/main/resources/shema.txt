@@ -71,5 +71,22 @@ VALUES
     ('E009', 'Mr.', 'Emily Anderson', '910123456D', '1986-09-18', '34 River Rd, Batticaloa', '+94799901234', '9012345678', 'Batticaloa Branch'),
     ('E010', 'Mr.', 'James Martin', '800123456E', '1970-04-22', '67 Forest St, Badulla', '+94700012345', '0123456789', 'Badulla Branch');
 
+CREATE TABLE orders (
+    order_id VARCHAR(5) PRIMARY KEY,
+    employee_id VARCHAR(5),
+    cust_name  VARCHAR(20),
+    cont_no VARCHAR(10),
+    email VARCHAR(50),
+    date VARCHAR(10),
+    pay_method VARCHAR(10),
+    discount VARCHAR(10),
+    FOREIGN KEY (employee_id) REFERENCES employee(id)
+);
+
+INSERT INTO orders (order_id, employee_id, cust_name, cont_no, email, date, pay_method, discount)
+VALUES
+    ('O001', 'E001', 'Customer 1', '0712345678', 'customer1@example.com', '2023-10-18', 'Cash', '5%'),
+    ('O002', 'E002', 'Customer 2', '0771234567', 'customer2@example.com', '2023-10-19', 'Card', '10%'),
+    ('O003', 'E003', 'Customer 3', '0769876543', 'customer3@example.com', '2023-10-20', 'Cash', '0%');
 
     
