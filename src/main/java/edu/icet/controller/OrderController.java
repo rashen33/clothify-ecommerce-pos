@@ -152,6 +152,4 @@ public class OrderController implements Initializable {
     public void btnPlaceOrder(ActionEvent actionEvent) {
     }
 
-
-
 }
