@@ -21,24 +21,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class OrderController implements Initializable {
-    public TextField txtCostName;
-    public TextField txtContNumber;
-    public TextField txtEmail;
     public TextField txtDate;
     public TextField txtEmpName;
     public ComboBox cmbEmpId;
     public TextField txtItemName;
     public ComboBox cmbItemCode;
-    public TextField txtDes;
-    public TextField txtQty;
-    public TextField txtQonHand;
-    public TextField txtSellPrice;
-    public TextField txtProfit;
-    public TextField txtType;
-    public TextField txtSize;
     public TextField txtOrderId;
     public ComboBox cmbPayMethod;
-    public TextField txtDiscount;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,7 +43,26 @@ public class OrderController implements Initializable {
 
         loadCmbPaymentMethod();
         setDate();
+//        generateId();
 
+    }
+
+    private void generateId() {
+        try {
+            ResultSet resultSet = CrudUtil.execute("SELECT order_id FROM orders ORDER BY id DESC LIMIT 1");
+
+            if (resultSet.next()){
+                int num = Integer.parseInt(resultSet.getString(1).split("[O]")[1]);
+                num++;
+                txtOrderId.setText(String.format("O%03d",num));
+            }else {
+                txtOrderId.setText("O001");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setDate() {
@@ -146,10 +154,6 @@ public class OrderController implements Initializable {
     public void btnUpdate(ActionEvent actionEvent) {
     }
 
-    public void btnAddToCart(ActionEvent actionEvent) {
+    public void btnAddToCard(ActionEvent actionEvent) {
     }
-
-    public void btnPlaceOrder(ActionEvent actionEvent) {
-    }
-
 }
