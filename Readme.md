@@ -19,7 +19,7 @@ Welcome to the "Clothify Ecommerce Application." This project aims to provide a 
 
 - Product catalog with categories: Ladies, Gents, and Kids.
 - Real-time inventory management.
-- Supplier and employee management.
+- Supplier and demployee management.
 
 ### 4. Order Management
 
