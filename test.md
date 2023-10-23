@@ -1,4 +1,4 @@
-Readme for the spring boot project
+Readme for the spring boot project.  
 
 **Project Name**
 
